@@ -1,3 +1,4 @@
+import { JRPC_ErrorCodes, JRPCException } from "../jrpc/error";
 import { JRPCHost } from "../jrpc/host";
 import { JRPC_Response, ValidationPipe } from "../jrpc/types";
 import { validateJsonSchema } from "../utils/jsonSchema";
@@ -52,21 +53,42 @@ export abstract class McpStream {
       throw new Error(`Tool ${name} not found`);
     }
 
-    const parse = validateJsonSchema(tool.inputSchema, params);
-    if (!parse.success) {
-      throw new Error(`Invalid params: ${JSON.stringify(parse.error)}`);
-    }
+    try {
+      const parse = validateJsonSchema(tool.inputSchema, params);
+      if (!parse.success) {
+        throw new JRPCException(
+          JRPC_ErrorCodes.INVALID_PARAMS,
+          `Invalid params`,
+          parse.error
+        );
+      }
 
-    const response = await tool.handler(parse.data);
-    return {
-      content: [
-        {
-          type: "text",
-          text: response,
-        },
-      ],
-      isError: false,
-    };
+      const response = await tool.handler(parse.data);
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(response),
+          },
+        ],
+      };
+    } catch (err) {
+      if (!(err instanceof JRPCException)) throw err;
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({
+              code: err.code,
+              message: err.message,
+              data: err.data,
+            }),
+          },
+        ],
+        isError: true,
+      };
+    }
   }
 
   public callResource(name: string, params: any) {

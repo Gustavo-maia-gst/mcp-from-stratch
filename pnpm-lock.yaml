@@ -14,6 +14,9 @@ dependencies:
   reflect-metadata:
     specifier: ^0.2.2
     version: 0.2.2
+  tsyringe:
+    specifier: ^4.10.0
+    version: 4.10.0
   typescript:
     specifier: ^5.8.3
     version: 5.8.3
@@ -888,6 +891,17 @@ packages:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
+
+  /tslib@1.14.1:
+    resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
+    dev: false
+
+  /tsyringe@4.10.0:
+    resolution: {integrity: sha512-axr3IdNuVIxnaK5XGEUFTu3YmAQ6lllgrvqfEoR16g/HGnYY/6We4oWENtAnzK6/LpJ2ur9PAb80RBt7/U4ugw==}
+    engines: {node: '>= 6.0.0'}
+    dependencies:
+      tslib: 1.14.1
+    dev: false
 
   /type-is@2.0.1:
     resolution: {integrity: sha512-OZs6gsjF4vMp32qrCbiVSkrFmXtG/AZhY3t0iAMrMBiAZyV9oALtXO8hsrHbMXF9x6L3grlFuwW2oAz7cav+Gw==}

@@ -76,11 +76,10 @@ export class McpStreamFactory {
           logging: {},
           prompts: {},
           resources: {
-            subscribe: true,
-            listChanged: true,
+            listChanged: false,
           },
           tools: {
-            listChanged: true,
+            listChanged: false,
           },
         },
         serverInfo: {
@@ -109,6 +108,10 @@ export class McpStreamFactory {
 
     stream.registerMethod("resources/read", (params: any) => {
       return stream.callResource(params.name, params.arguments);
+    });
+
+    stream.registerMethod("ping", (_params: any) => {
+      return Promise.resolve({});
     });
   }
 }

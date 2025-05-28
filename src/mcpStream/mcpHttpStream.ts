@@ -90,7 +90,7 @@ export class McpHttpStream extends McpStream {
           JSON.stringify({ title: "Sending response", code, result }, null, 2)
         );
 
-        this.sendMessage(result);
+        this.send(result);
 
         return res.status(code).end();
       });

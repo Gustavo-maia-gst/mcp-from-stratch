@@ -1,8 +1,7 @@
 import "reflect-metadata";
-import { McpStream } from "./mcpStream";
 import Ajv from "ajv";
 import { McpStreamFactory } from "./mcpStreamFactory";
-import { forEachMethod } from "../utils/reflect";
+import { Class, forEachMethod } from "../utils/reflect";
 
 const MCP_SERVER_KEY = Symbol("__mcp:server");
 const MCP_TYPE_KEY = Symbol("__mcp:type");
@@ -90,7 +89,7 @@ export function Tool(definition: ToolData) {
   };
 }
 
-export function StartServer(server: Function) {
+export function StartServer(server: Class) {
   console.log("Starting MCP server...");
   const opts: McpServerOpts = Reflect.getMetadata(MCP_SERVER_KEY, server);
   if (!opts) {
