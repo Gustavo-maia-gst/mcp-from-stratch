@@ -1,0 +1,30 @@
+{
+  "name": "mcp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node src/index.ts'",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^22.15.21",
+    "ajv": "^8.17.1",
+    "reflect-metadata": "^0.2.2",
+    "typescript": "^5.8.3",
+    "uuid": "^11.1.0",
+    "zod": "^3.25.28"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/json-schema": "^7.0.15",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2"
+  }
+}
